@@ -1,1 +1,1 @@
-# geoSpartial_village
+# Geo Spatial village
