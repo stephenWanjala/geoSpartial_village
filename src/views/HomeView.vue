@@ -27,15 +27,20 @@ subCounties.value.forEach(value => {console.log(value)})
 
 <template>
   <v-container>
-    <h1>Sub Counties</h1>
-    <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
-    <v-alert v-else-if="mError" type="error">{{ mError }}</v-alert>
-    <v-data-table v-else :headers="headers" :items="subCounties" :loading="loading" item-key="id">
-      <template v-slot:items="props">
-        <td>{{ props.item.org_id }}</td>
-        <td>{{ props.item.name }}</td>
-        <!-- Add other columns here -->
-      </template>
-    </v-data-table>
+    <div class="text-center"> <!-- Added class text-center here -->
+      <h1>Villages</h1>
+    </div>
+    <div>
+      <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+      <v-alert v-else-if="mError" type="error">{{ mError }}</v-alert>
+      <v-data-table v-else :headers="headers" :items="subCounties" :loading="loading" item-key="id">
+        <template v-slot:items="props">
+          <td>{{ props.item.org_id }}</td>
+          <td>{{ props.item.name }}</td>
+          <!-- Add other columns here -->
+        </template>
+      </v-data-table>
+    </div>
   </v-container>
 </template>
+
