@@ -9,7 +9,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-green bg-green">
+    <nav class="navbar navbar-expand-lg" style="background-color: #20c997;">
       <div class="container">
         <RouterLink class="navbar-brand" to="/">Table Visualization</RouterLink>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
