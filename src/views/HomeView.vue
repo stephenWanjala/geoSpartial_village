@@ -29,8 +29,7 @@ onMounted(async () => {
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">Error: {{ error }}</div>
     <ul v-else>
-      <li v-for="subCounty in subCounties" :key="subCounty.id">{{ subCounty.name }}</li>
+      <li v-for="subCounty in subCounties.message" :key="subCounty.id">{{ subCounty.name }}</li>
     </ul>
   </div>
 </template>
-
