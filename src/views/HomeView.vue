@@ -27,7 +27,7 @@ subCounties.value.forEach(value => {console.log(value)})
 
 <template>
   <v-container>
-    <h1>Sub Counties</h1>
+    <h1>Villages</h1>
     <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
     <v-alert v-else-if="mError" type="error">{{ mError }}</v-alert>
     <v-data-table v-else :headers="headers" :items="subCounties" :loading="loading" item-key="id">
