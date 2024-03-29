@@ -1,15 +1,12 @@
 <script setup lang="ts">
+
 import { RouterLink, RouterView } from 'vue-router'
-
-
-
-
-
 </script>
+<style src="@/assets/main.css" lang="css"></style>
 
 <template>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-green bg-green">
+    <nav class="navbar navbar-expand-lg  backg-dark">
       <div class="container">
         <RouterLink class="navbar-brand" to="/">Table Visualization</RouterLink>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
