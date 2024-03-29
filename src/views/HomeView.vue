@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import {  useSubCountiesStore } from '@/stores/store'
+import {  useVillagesStore } from '@/stores/store'
 import { ref, onMounted } from 'vue';
-import type { SubCounty } from '@/types/types'
+import type { Village } from '@/types/types'
 
 
-const subCountiesStore = useSubCountiesStore();
-const subCounties = ref<SubCounty[]>([]);
+const villagesStore = useVillagesStore();
+const villages = ref<Village[]>([]);
 const loading = ref<boolean>(false);
 const mError = ref<string | null>(null);
 
 onMounted(async () => {
   loading.value = true;
   try {
-    await subCountiesStore.fetchSubCounties();
-    subCounties.value = subCountiesStore.subCounties;
+    await villagesStore.fetchVillages();
+    villages.value = villagesStore.villages;
 
   } catch (error) {
     mError.value = (error as Error).message || 'An error occurred';
@@ -21,7 +21,7 @@ onMounted(async () => {
     loading.value = false;
   }
 });
-subCounties.value.forEach(value => {console.log(value)})
+villages.value.forEach(value => {console.log(value)})
 </script>
 
 
@@ -33,7 +33,7 @@ subCounties.value.forEach(value => {console.log(value)})
     <div>
       <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
       <v-alert v-else-if="mError" type="error">{{ mError }}</v-alert>
-      <v-data-table v-else :headers="headers" :items="subCounties" :loading="loading" item-key="id">
+      <v-data-table v-else :headers="headers" :items="villages" :loading="loading" item-key="id">
         <template v-slot:items="props">
           <td>{{ props.item.org_id }}</td>
           <td>{{ props.item.name }}</td>
