@@ -1,35 +1,40 @@
 <script setup lang="ts">
-import { useSubCountiesStore } from "@/stores/store";
+import { type SubCounty, useSubCountiesStore } from '@/stores/store'
 import { ref, onMounted } from 'vue';
 
+
 const subCountiesStore = useSubCountiesStore();
-const subCounties = ref<any[]>([]);
+const subCounties = ref<SubCounty[]>([]);
 const loading = ref<boolean>(false);
-const error = ref<string | null>(null);
+const mError = ref<string | null>(null);
 
 onMounted(async () => {
   loading.value = true;
   try {
     await subCountiesStore.fetchSubCounties();
     subCounties.value = subCountiesStore.subCounties;
-    console.log(subCounties)
-  } catch (err ) {
-    error.value = error.value || 'An error occurred';
+
+  } catch (error) {
+    mError.value = (error as Error).message || 'An error occurred';
   } finally {
     loading.value = false;
   }
 });
+subCounties.value.forEach(value => {console.log(value)})
 </script>
 
 
 
 <template>
-  <div>
+  <v-container>
     <h1>Sub Counties</h1>
-    <div v-if="loading">Loading...</div>
-    <div v-else-if="error">Error: {{ error }}</div>
+    <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+    <v-alert v-else-if="mError" type="error">{{ mError }}</v-alert>
     <ul v-else>
-      <li v-for="subCounty in subCounties.message" :key="subCounty.id">{{ subCounty.name }}</li>
+      <li v-for="subCounty in subCounties" :key="subCounty.id">
+        Org_id->{{ subCounty.org_id}}  VillageName:{{subCounty.name}}
+      </li>
     </ul>
-  </div>
+  </v-container>
 </template>
+
