@@ -12,7 +12,7 @@ export const useVillagesStore = defineStore({
     mError: ref<string | null>(null),
   }),
   actions: {
-    async fetchVillages(page: number = 1) {
+    async fetchVillages(page: number = 79) {
       try {
         this.loading = true;
         const { villages, pagination } = await fetchVillages(page);

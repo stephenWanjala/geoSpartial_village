@@ -31,7 +31,7 @@ villages.value.forEach(value => {console.log(value)})
       <h1>Villages</h1>
     </div>
     <div>
-      <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+      <v-progress-linear v-if="loading" indeterminate class=" green bg-green"></v-progress-linear>
       <v-alert v-else-if="mError" type="error">{{ mError }}</v-alert>
       <v-data-table v-else :headers="headers" :items="villages" :loading="loading" item-key="id">
         <template v-slot:items="props">
