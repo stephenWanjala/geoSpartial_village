@@ -1,6 +1,19 @@
 <script setup lang="ts">
 
-import { RouterLink, RouterView } from 'vue-router'
+import { onMounted } from 'vue';
+import { RouterLink, RouterView } from 'vue-router';
+
+onMounted(() => {
+  const navbarToggle = document.querySelector('.navbar-toggler');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+
+  if (navbarToggle && navbarCollapse) {
+    navbarToggle.addEventListener('click', () => {
+      navbarCollapse.classList.toggle('show');
+    });
+  }
+});
+
 </script>
 <style src="@/assets/main.css" lang="css"></style>
 
@@ -9,7 +22,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <nav class="navbar navbar-expand-lg  bag-green">
       <div class="container">
         <RouterLink class="navbar-brand" to="/">Table Visualization</RouterLink>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -24,5 +37,3 @@ import { RouterLink, RouterView } from 'vue-router'
   </header>
   <RouterView />
 </template>
-
-
