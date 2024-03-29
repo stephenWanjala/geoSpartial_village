@@ -9,3 +9,14 @@ export interface SubCounty {
   latitude?: number; // Optional latitude property
   longitude?: number; // Optional longitude property
 }
+
+export interface GoogleApiResponse {
+  results: {
+    geometry: {
+      location: {
+        lat: number;
+        lng: number;
+      };
+    };
+  }[];
+}

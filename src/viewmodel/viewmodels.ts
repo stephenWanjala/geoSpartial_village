@@ -1,18 +1,9 @@
 // viewmodels/viewModel.ts
 import axios from 'axios';
 import { API_KEY, BEARER_TOKEN } from '@/main'
-import { type SubCounty } from '@/types/types';
+import { type GoogleApiResponse, type SubCounty } from '@/types/types'
 
-interface GoogleApiResponse {
-  results: {
-    geometry: {
-      location: {
-        lat: number;
-        lng: number;
-      };
-    };
-  }[];
-}
+
 
 export async function fetchSubCounties(): Promise<SubCounty[]> {
   try {
