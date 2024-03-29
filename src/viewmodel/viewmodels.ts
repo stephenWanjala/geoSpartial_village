@@ -1,4 +1,4 @@
-// viewmodels/subCountiesViewModel.ts
+// viewmodels/viewModel.ts
 import axios from 'axios';
 import { API_KEY, BEARER_TOKEN } from '@/main'
 import { type SubCounty } from '@/types/types';
