@@ -6,4 +6,6 @@ export interface SubCounty {
   parent_id: string;
   level_id: number;
   supervisor: string;
+  latitude?: number; // Optional latitude property
+  longitude?: number; // Optional longitude property
 }
