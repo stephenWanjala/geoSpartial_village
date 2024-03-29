@@ -1,4 +1,4 @@
-export interface SubCounty {
+export interface Village {
   id: number;
   name: string;
   code: string;

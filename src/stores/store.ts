@@ -1,21 +1,21 @@
 // store.ts
 import { defineStore } from 'pinia'
-import { fetchSubCounties } from '@/viewmodel/viewmodels'
+import { fetchVillages } from '@/viewmodel/viewmodels'
 import { ref } from 'vue'
-import type { SubCounty } from '@/types/types'
+import type { Village } from '@/types/types'
 
-export const useSubCountiesStore = defineStore({
-  id: 'subCounties',
+export const useVillagesStore = defineStore({
+  id: 'villages',
   state: () => ({
-    subCounties: [] as SubCounty[],
+    villages: [] as Village[],
     loading: ref(false),
     mError: ref<string | null>(null),
   }),
   actions: {
-    async fetchSubCounties() {
+    async fetchVillages() {
       try {
         this.loading= true;
-        this.subCounties = await fetchSubCounties();
+        this.villages = await fetchVillages();
       } catch (error) {
         this.mError = (error as Error).message;
       } finally {

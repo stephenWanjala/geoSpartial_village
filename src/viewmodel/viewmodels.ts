@@ -1,11 +1,11 @@
 // viewmodels/viewModel.ts
 import axios from 'axios';
 import { API_KEY, BEARER_TOKEN } from '@/main'
-import { type GoogleApiResponse, type SubCounty } from '@/types/types'
+import { type GoogleApiResponse, type Village } from '@/types/types'
 
 
 
-export async function fetchSubCounties(): Promise<SubCounty[]> {
+export async function fetchVillages(): Promise<Village[]> {
   try {
     const response = await axios.get('https://training.digimal.uonbi.ac.ke/api/get_sub_counties_list?parent_id=OU314032', {
       headers: {
@@ -13,10 +13,10 @@ export async function fetchSubCounties(): Promise<SubCounty[]> {
       }
     });
 
-    const subCounties: SubCounty[] = response.data.message;
+    const villages: Village[] = response.data.message;
 
     // Fetch coordinates for each sub-county and store them along with org_id
-    for (const subCounty of subCounties) {
+    for (const subCounty of villages) {
       const locationData = await fetchCoordinates(subCounty.name);
       if (locationData?.latitude !== undefined && locationData?.longitude !== undefined) {
         subCounty.latitude = locationData.latitude;
@@ -24,7 +24,7 @@ export async function fetchSubCounties(): Promise<SubCounty[]> {
       }
     }
 
-    return subCounties;
+    return villages;
   } catch (error) {
     throw new Error((error as Error).message || 'An error occurred');
   }
