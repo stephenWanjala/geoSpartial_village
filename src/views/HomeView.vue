@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { type SubCounty, useSubCountiesStore } from '@/stores/store'
+import {  useSubCountiesStore } from '@/stores/store'
 import { ref, onMounted } from 'vue';
+import type { SubCounty } from '@/types/types'
 
 
 const subCountiesStore = useSubCountiesStore();

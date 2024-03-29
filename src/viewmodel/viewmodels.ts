@@ -1,6 +1,7 @@
-import axios from 'axios';
-import { BEARER_TOKEN } from '@/main';
-import type { SubCounty } from '@/stores/store'
+import axios from 'axios'
+import { BEARER_TOKEN } from '@/main'
+import type { SubCounty } from '@/types/types'
+
 
 export async function fetchSubCounties(): Promise<SubCounty[]> {
   try {
@@ -8,9 +9,9 @@ export async function fetchSubCounties(): Promise<SubCounty[]> {
       headers: {
         Authorization: `Bearer ${BEARER_TOKEN}`
       }
-    });
-    return response.data.message;
+    })
+    return response.data.message
   } catch (error) {
-    throw new Error((error as Error).message || 'An error occurred');
+    throw new Error((error as Error).message || 'An error occurred')
   }
 }
