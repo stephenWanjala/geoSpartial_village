@@ -19,9 +19,9 @@ async function fetchCoordinates(address: string): Promise<{ latitude: number; lo
   }
 }
 
-export async function fetchVillages(page: number): Promise<{ villages: Village[]; pagination: Pagination }> {
+export async function fetchVillages(page: number,county_id:number): Promise<{ villages: Village[]; pagination: Pagination }> {
   try {
-    const response = await axios.get(`https://training.digimal.uonbi.ac.ke/api/administrative_unit?county_id=9&page=${page}`,{
+    const response = await axios.get(`https://training.digimal.uonbi.ac.ke/api/administrative_unit?county_id=${county_id}&page=${page}`,{
       headers: {
         Authorization: `Bearer ${BEARER_TOKEN}`,
       },
@@ -48,3 +48,4 @@ export async function fetchVillages(page: number): Promise<{ villages: Village[]
     throw new Error((error as Error).message || 'An error occurred');
   }
 }
+

@@ -28,7 +28,7 @@ villages.value.forEach(value => {console.log(value)})
 <template>
   <v-container>
     <div class="text-center">
-      <h1>Villages</h1>
+      <h1> Homabay Villages</h1>
     </div>
     <div>
       <v-progress-linear v-if="loading" indeterminate class="bg-green"></v-progress-linear>

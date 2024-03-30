@@ -1,3 +1,42 @@
 .bag-green {
     background-color: #20c997
 }
+
+/* main.css */
+
+/* Container to hold select boxes */
+.select-container {
+    display: flex;
+    flex-wrap: wrap; /* Wrap items to the next line if they exceed the container width */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
+  }
+  
+  /* Style select boxes */
+  .select-container select {
+    flex: 1; /* Distribute available space equally among select boxes */
+    margin-right: 10px; /* Add some space between select boxes */
+    border: 1px solid #ccc; /* Add default border style */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    padding: 10px; /* Add padding */
+    font-size: 16px; /* Set font size */
+    background-color: #fff; /* Set background color */
+  }
+  
+  /* Style option text */
+  select option {
+    color: #333; /* Change the color as per your design */
+  }
+  
+  /* Style select box when focused */
+  .select-container select:focus {
+    outline: none;
+    border-color: #007bff; /* Change the color as per your design */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Change the shadow as per your design */
+  }
+  
+  /* Style disabled options */
+  select option:disabled {
+    color: #999; /* Change the color as per your design */
+  }
+  
+  
