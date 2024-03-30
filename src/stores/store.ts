@@ -15,7 +15,7 @@ export const useVillagesStore = defineStore({
     async fetchVillages(page: number = 1, county_id:number = 9) {
       try {
         this.loading = true;
-        const { villages, pagination } = await fetchVillages(page,9);
+        const { villages, pagination } = await fetchVillages(page,county_id);
         this.villages = villages;
         this.pagination = pagination;
       } catch (error) {
