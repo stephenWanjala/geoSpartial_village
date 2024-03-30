@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useVillagesStore } from '@/stores/store';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue'
 import type { Village, Pagination } from '@/types/types';
 
 const villagesStore = useVillagesStore();
@@ -8,6 +8,7 @@ const villages = ref<Village[]>([]);
 const loading = ref<boolean>(false);
 const mError = ref<string | null>(null);
 const currentPage = ref<number>(1); // Track current page
+const search = ref<string>('');
 
 const handleError = (error: Error) => {
   console.error(error);
@@ -26,6 +27,14 @@ const fetchVillages = async (page: number) => {
     loading.value = false;
   }
 };
+const filteredVillages = computed(() => {
+  if (!search.value) {
+    return villages.value;
+  }
+  return villages.value.filter(village =>
+    village.name.toLowerCase().includes(search.value.toLowerCase())
+  );
+});
 
 onMounted(async () => {
   await fetchVillages(currentPage.value); // Fetch villages for initial page
@@ -64,13 +73,14 @@ const exportToJson = () => {
 <template>
   <v-container>
     <div class="text-center">
-      <h1> Homabay Villages </h1>
+      <h1> Homabay Villages  </h1>
+
       <button @click="exportToJson" v-if="!loading">Export to JSON</button>
     </div>
     <div>
       <v-progress-linear v-if="loading" indeterminate class="bg-green"></v-progress-linear>
       <v-alert v-else-if="mError" type="error">{{ mError }}</v-alert>
-      <v-data-table  :headers="headers" :items="villages" :loading="loading" item-key="id">
+      <v-data-table  :headers="headers" :items="villages" :loading="loading" item-key="id" auto-width>
         <template v-slot:items="props">
           <td>{{ props.item.org_id }}</td>
           <td>{{ props.item.name }}</td>
@@ -78,11 +88,12 @@ const exportToJson = () => {
         </template>
       </v-data-table>
       <!-- Pagination controls -->
-      <div class="pagination ">
+      <v-row class="d-flex justify-center">
         <v-btn @click="prevPage" :disabled="currentPage === 1">Previous</v-btn>
-        <span>{{ currentPage }} / {{ villagesStore.pagination.total_pages }}</span>
+        <span>Page {{ currentPage }} of {{ villagesStore.pagination.total_pages }}</span>
+
         <v-btn @click="nextPage" :disabled="currentPage === villagesStore.pagination.total_pages">Next</v-btn>
-      </div>
+      </v-row>
     </div>
   </v-container>
 </template>
