@@ -40,6 +40,7 @@ export const useCountyStore = defineStore({
   state: () => ({
     counties: [] as County[],
     administrativeUnits: [] as AdministrativeUnit[],
+    loadingCoordinates: false,
   }),
   actions: {
     async fetchCounties() {
@@ -54,18 +55,22 @@ export const useCountyStore = defineStore({
     },
     async fetchAdministrativeUnitsByCounty(countyId: number) {
       try {
-        const administrativeUnits = await fetchAdministrativeUnitsByCounty(countyId); // Call the function from the view model
-        for (const unit of administrativeUnits) {
-          const address = `${unit.village}, ${unit.subcounty}, ${unit.county}`;
-          const coordinates = await this.fetchCoordinates(address);
-          unit.latitude = coordinates.lat;
-          unit.longitude = coordinates.lng;
-          console.log("Administrative unit:", unit)
+        let administrativeUnits = JSON.parse(localStorage.getItem(`adminUnits_${countyId}`) || '[]');
+        if (administrativeUnits.length === 0) {
+          this.loadingCoordinates = true; // Start loading
+          administrativeUnits = await fetchAdministrativeUnitsByCounty(countyId);
+          for (const unit of administrativeUnits) {
+            const address = `${unit.village}, ${unit.subcounty}, ${unit.county}`;
+            const coordinates = await this.fetchCoordinates(address);
+            unit.latitude = coordinates.lat;
+            unit.longitude = coordinates.lng;
+          }
+          localStorage.setItem(`adminUnits_${countyId}`, JSON.stringify(administrativeUnits));
+          this.loadingCoordinates = false; // End loading
         }
         this.administrativeUnits = administrativeUnits;
-        console.log('Administrative units:', administrativeUnits);
       } catch (error) {
-        console.error('Error fetching administrative units:', error);
+        this.loadingCoordinates = false; // End loading in case of error
         throw error;
       }
     },

@@ -1,5 +1,6 @@
 <template>
   <v-app style="height: 500px; width: 100%">
+    <v-progress-linear v-if="countyStore.loadingCoordinates" indeterminate class="bg-green"></v-progress-linear>
     <Suspense>
       <template #default>
         <l-map ref="map" :zoom="zoom" :center="center" style="height: 100%; width: 100%">
@@ -15,9 +16,19 @@
           >
 
             <l-popup>
-              <p><strong>Village:</strong> {{ unit.village }}</p>
-              <p><strong>Latitude:</strong> {{ unit.latitude }}</p>
-              <p><strong>Longitude:</strong> {{ unit.longitude }}</p>
+              <v-card>
+                <v-card-title>
+                  <h5><strong>Village:</strong> {{ unit.village }}</h5>
+                </v-card-title>
+                <v-card-text>
+                  <p><strong>Latitude:</strong> {{ unit.latitude }}</p>
+                  <p><strong>Longitude:</strong> {{ unit.longitude }}</p>
+                  <p><strong>County:</strong> {{ unit.county }}</p>
+                  <p><strong>Sub-County:</strong> {{ unit.subcounty_id }}</p>
+                  <p><strong>Ward:</strong> {{ unit.ward }}</p>
+
+                </v-card-text>
+              </v-card>
             </l-popup>
           </l-marker>
         </l-map>
