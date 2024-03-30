@@ -2,46 +2,41 @@
     background-color: #20c997
 }
 
+/* main.css */
 
-/* External CSS file: styles.css */
-
-/* Style for select elements */
-select {
-    width: calc(20% - 10px); /* Adjust width based on desired spacing */
-    padding: 10px;
-    border: 2px solid #ccc; /* Add border and adjust thickness/color as needed */
-    border-radius: 10px; /* Add rounded corners */
-    margin-right: 20px; /* Add space between the select elements */
-    font-size: 16px;
-    background-color: #fff; /* Change the background color as needed */
-    color: #333; /* Change the text color as needed */
+/* Container to hold select boxes */
+.select-container {
+    display: flex;
+    flex-wrap: wrap; /* Wrap items to the next line if they exceed the container width */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
   }
   
-  /* Style for select option elements */
+  /* Style select boxes */
+  .select-container select {
+    flex: 1; /* Distribute available space equally among select boxes */
+    margin-right: 10px; /* Add some space between select boxes */
+    border: 1px solid #ccc; /* Add default border style */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    padding: 10px; /* Add padding */
+    font-size: 16px; /* Set font size */
+    background-color: #fff; /* Set background color */
+  }
+  
+  /* Style option text */
   select option {
-    background-color: #fff; /* Change the background color as needed */
-    color: #333; /* Change the text color as needed */
+    color: #333; /* Change the color as per your design */
   }
   
-  /* Style for selected option */
-  select option[selected] {
-    background-color: #f0f0f0; /* Change the background color of selected option */
+  /* Style select box when focused */
+  .select-container select:focus {
+    outline: none;
+    border-color: #007bff; /* Change the color as per your design */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Change the shadow as per your design */
   }
   
-  /* Hide the dropdown arrow */
-  select::-ms-expand {
-    display: none;
-  }
-  
-  /* Style for disabled options */
+  /* Style disabled options */
   select option:disabled {
-    color: #999; /* Change the color of disabled options */
+    color: #999; /* Change the color as per your design */
   }
   
-  /* Clear floats to ensure equal spacing */
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
   

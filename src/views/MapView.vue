@@ -105,30 +105,31 @@ watch(selectedSublocation, async (newValue, oldValue) => {
 
 <style lang="css" src="@/assets/main.css"></style>
 <template>
-<div>
-  <select id="county" name="county" v-model="selectedCounty">
-      <option value="" disabled selected hidden>Select County</option>
-      <option v-for="countList in county.message" :key="countList.id" :value="countList.org_id">{{ countList.name }}</option>
-    </select>
+<div class="select-container">
+  <select id="county" name="county" :value="selectedCounty" @input="selectedCounty = $event.target.value">
+  <option value="" disabled hidden>Select County</option>
+  <option v-for="countList in county.message" :key="countList.id" :value="countList.org_id">{{ countList.name }}</option>
+</select>
 
-<select id="sub-county" name="sub-county" v-model="selectedSubCounty">
+
+<select id="sub-county"  name="sub-county" :value="selectedSubCounty" @input="selectedSubCounty = $event.target.value">
   <option value="" disabled selected hidden>Select Subcounty</option>
   <option v-for="sub_countyList in sub_county.message" :key="sub_countyList.id" :value="sub_countyList.org_id">{{ sub_countyList.name }}</option>
 </select>
 
-<select id="selection" name="location" v-model="selectedWard">
+<select id="selection" name="location" :value="selectedWard" @input="selectedWard = $event.target.value">
   <option value="" disabled selected hidden>Select ward</option>
   <option v-for="ward_list in ward.message" :key="ward_list.id" :value="ward_list.org_id">{{ ward_list.name }}</option>
 
 </select>
 
-<select id="Sublocation" name="Sublocation" v-model="selectedlocation">
+<select id="Sublocation" name="Sublocation" :value="selectedlocation" @input="selectedlocation = $event.target.value">
   <option value="" disabled selected hidden>Select Location</option>
   <option v-for="locationList in location.message" :key="locationList.id" :value="locationList.org_id">{{ locationList.name }}</option>
 
 </select>
 
-<select id="village" name="village" v-model="selectedSublocation">
+<select id="village" name="village" :value="selectedSublocation" @input="selectedSublocation = $event.target.value">
   <option value="" disabled selected hidden>Select Sublocation</option>
   <option v-for="SublocationList in Sublocation.message" :key="SublocationList.id" :value="SublocationList.org_id">{{ SublocationList.name }}</option>
 
@@ -140,6 +141,7 @@ watch(selectedSublocation, async (newValue, oldValue) => {
 
 </select>
 
+<button>Refresh</button>
 </div>
   <div style="height: 100vh; width: 100%">
     <l-map ref="map" v-model:zoom="zoom" :center="[-0.5350427, 34.4530968]">

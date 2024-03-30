@@ -42,7 +42,12 @@ onMounted(() => {
           <RouterLink class="nav-link" to="/map">
             <v-list-item prepend-icon="mdi-map" title="map" value="map"></v-list-item>
           </RouterLink>
-          <v-list-item prepend-icon="mdi-car" title="Dist" value="dist"></v-list-item>
+          <!-- <v-list-item prepend-icon="mdi-car" title="Dist" value="dist"></v-list-item> -->
+          <v-list-item  title="Nets Distribution" value="dist"></v-list-item>
+          <v-list-item  title="Total Required" value="dist"></v-list-item>
+          <v-list-item  title="Total Delivered" value="dist"></v-list-item>
+          <v-list-item  title="Total Distributed" value="dist"></v-list-item>
+          <v-list-item  title="Total Remaining" value="dist"></v-list-item>
 
         </v-list>
       </v-navigation-drawer>
