@@ -41,7 +41,7 @@ const exportToJson = () => {
   <v-container>
     <div class="text-center">
       <h1> Homabay Villages </h1>
-      <button @click="exportToJson">Export to JSON</button>
+      <button @click="exportToJson" v-if="!loading">Export to JSON</button>
     </div>
     <div>
       <v-progress-linear v-if="loading" indeterminate class="bg-green"></v-progress-linear>
