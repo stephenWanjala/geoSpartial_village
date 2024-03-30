@@ -15,6 +15,7 @@ onMounted(async () => {
     await villagesStore.fetchVillages();
     villages.value = villagesStore.villages;
 
+
   } catch (error) {
     mError.value = (error as Error).message || 'An error occurred';
   } finally {
@@ -22,13 +23,25 @@ onMounted(async () => {
   }
 });
 villages.value.forEach(value => {console.log(value)})
+const exportToJson = () => {
+  const dataToExport = JSON.stringify(villages.value, null, 2)
+  const blob = new Blob([dataToExport], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'data.json'
+  document.body.appendChild(a)
+  a.click()
+  window.URL.revokeObjectURL(url)
+}
 </script>
 
 
 <template>
   <v-container>
     <div class="text-center">
-      <h1> Homabay Villages</h1>
+      <h1> Homabay Villages </h1>
+      <button @click="exportToJson">Export to JSON</button>
     </div>
     <div>
       <v-progress-linear v-if="loading" indeterminate class="bg-green"></v-progress-linear>

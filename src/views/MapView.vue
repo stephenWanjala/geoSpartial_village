@@ -8,7 +8,7 @@ const villages = ref<Village[]>([]);
 const loading = ref<boolean>(false);
 const mError = ref<string | null>(null);
 import "leaflet/dist/leaflet.css";
-import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
+import { LMap, LTileLayer, LMarker, LCircle } from '@vue-leaflet/vue-leaflet'
 
 const zoom = ref(13);
 
@@ -27,7 +27,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-container>
     <div class="text-center">
       <!-- Add any text or elements you want to display here -->
     </div>
@@ -45,9 +44,12 @@ onMounted(async () => {
           <template v-for="village in villages" :key="village.id">
             <l-marker :lat-lng="[village.latitude, village.longitude]"></l-marker>
           </template>
+          <template v-for="village in villages" :key="village.id">
+            <p>{{village.name}}</p>
+          </template>
         </l-map>
 
       </div>
     </div>
-  </v-container>
+
 </template>
