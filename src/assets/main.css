@@ -1,3 +1,47 @@
 .bag-green {
     background-color: #20c997
 }
+
+
+/* External CSS file: styles.css */
+
+/* Style for select elements */
+select {
+    width: calc(20% - 10px); /* Adjust width based on desired spacing */
+    padding: 10px;
+    border: 2px solid #ccc; /* Add border and adjust thickness/color as needed */
+    border-radius: 10px; /* Add rounded corners */
+    margin-right: 20px; /* Add space between the select elements */
+    font-size: 16px;
+    background-color: #fff; /* Change the background color as needed */
+    color: #333; /* Change the text color as needed */
+  }
+  
+  /* Style for select option elements */
+  select option {
+    background-color: #fff; /* Change the background color as needed */
+    color: #333; /* Change the text color as needed */
+  }
+  
+  /* Style for selected option */
+  select option[selected] {
+    background-color: #f0f0f0; /* Change the background color of selected option */
+  }
+  
+  /* Hide the dropdown arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  
+  /* Style for disabled options */
+  select option:disabled {
+    color: #999; /* Change the color of disabled options */
+  }
+  
+  /* Clear floats to ensure equal spacing */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
