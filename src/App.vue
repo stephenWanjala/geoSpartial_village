@@ -44,7 +44,7 @@ onMounted(() => {
       </v-navigation-drawer>
 
       <v-main>
-        <v-app-bar app color="#20c997">
+        <v-app-bar app color="#20c997" elevation="0">
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-toolbar-title> DigiMal-KE</v-toolbar-title>
         </v-app-bar>
