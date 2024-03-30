@@ -20,7 +20,7 @@ const selectedSubCounty = ref(null); // Initialize selectedCounty as null
 const selectedWard = ref(null); // Initialize selectedCounty as null
 const selectedlocation = ref(null); // Initialize selectedCounty as null
 const selectedSublocation = ref(null); // Initialize selectedCounty as null
-const zoom=ref(10)
+const zoom=ref(20)
 
 onMounted(async () => {
   try {
@@ -29,7 +29,7 @@ onMounted(async () => {
         Authorization: `Bearer ${BEARER_TOKEN}`
       }
     });
-    county.value = response.data.message;
+    county.value = response.data.message.slice(1);
   } catch (error) {
     console.error('Error fetching county:', error);
   }
