@@ -2,6 +2,10 @@
 import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import { BEARER_TOKEN } from '@/main';
+import "leaflet/dist/leaflet.css";
+import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
+
+
 
 
 const county = ref([]);
@@ -16,6 +20,7 @@ const selectedSubCounty = ref(null); // Initialize selectedCounty as null
 const selectedWard = ref(null); // Initialize selectedCounty as null
 const selectedlocation = ref(null); // Initialize selectedCounty as null
 const selectedSublocation = ref(null); // Initialize selectedCounty as null
+const zoom=ref(10)
 
 onMounted(async () => {
   try {
@@ -105,57 +110,52 @@ watch(selectedSublocation, async (newValue, oldValue) => {
 
 <style lang="css" src="@/assets/main.css"></style>
 <template>
-<div class="select-container">
-  <select id="county" name="county" :value="selectedCounty" @input="selectedCounty = $event.target.value">
-  <option value="" disabled hidden>Select County</option>
-  <option v-for="countList in county.message" :key="countList.id" :value="countList.org_id">{{ countList.name }}</option>
-</select>
+  <div class="select-container">
+    <select id="county" name="county" :value="selectedCounty" @input="selectedCounty = $event.target.value">
+      <option value="" disabled hidden>Select County</option>
+      <option v-for="countList in county.message" :key="countList.id" :value="countList.org_id">{{ countList.name }}</option>
+    </select>
 
 
-<select id="sub-county"  name="sub-county" :value="selectedSubCounty" @input="selectedSubCounty = $event.target.value">
-  <option value="" disabled selected hidden>Select Subcounty</option>
-  <option v-for="sub_countyList in sub_county.message" :key="sub_countyList.id" :value="sub_countyList.org_id">{{ sub_countyList.name }}</option>
-</select>
+    <select id="sub-county"  name="sub-county" :value="selectedSubCounty" @input="selectedSubCounty = $event.target.value">
+      <option value="" disabled selected hidden>Select Subcounty</option>
+      <option v-for="sub_countyList in sub_county.message" :key="sub_countyList.id" :value="sub_countyList.org_id">{{ sub_countyList.name }}</option>
+    </select>
 
-<select id="selection" name="location" :value="selectedWard" @input="selectedWard = $event.target.value">
-  <option value="" disabled selected hidden>Select ward</option>
-  <option v-for="ward_list in ward.message" :key="ward_list.id" :value="ward_list.org_id">{{ ward_list.name }}</option>
+    <select id="selection" name="location" :value="selectedWard" @input="selectedWard = $event.target.value">
+      <option value="" disabled selected hidden>Select ward</option>
+      <option v-for="ward_list in ward.message" :key="ward_list.id" :value="ward_list.org_id">{{ ward_list.name }}</option>
 
-</select>
+    </select>
 
-<select id="Sublocation" name="Sublocation" :value="selectedlocation" @input="selectedlocation = $event.target.value">
-  <option value="" disabled selected hidden>Select Location</option>
-  <option v-for="locationList in location.message" :key="locationList.id" :value="locationList.org_id">{{ locationList.name }}</option>
+    <select id="Sublocation" name="Sublocation" :value="selectedlocation" @input="selectedlocation = $event.target.value">
+      <option value="" disabled selected hidden>Select Location</option>
+      <option v-for="locationList in location.message" :key="locationList.id" :value="locationList.org_id">{{ locationList.name }}</option>
 
-</select>
+    </select>
 
-<select id="village" name="village" :value="selectedSublocation" @input="selectedSublocation = $event.target.value">
-  <option value="" disabled selected hidden>Select Sublocation</option>
-  <option v-for="SublocationList in Sublocation.message" :key="SublocationList.id" :value="SublocationList.org_id">{{ SublocationList.name }}</option>
+    <select id="village" name="village" :value="selectedSublocation" @input="selectedSublocation = $event.target.value">
+      <option value="" disabled selected hidden>Select Sublocation</option>
+      <option v-for="SublocationList in Sublocation.message" :key="SublocationList.id" :value="SublocationList.org_id">{{ SublocationList.name }}</option>
 
-</select>
+    </select>
 
-<select id="village" name="village">
-  <option value="" disabled selected hidden>Select Village</option>
-  <option v-for="VillageList in Village.message" :key="VillageList.id" :value="VillageList.org_id">{{ VillageList.name }}</option>
+    <select id="village" name="village">
+      <option value="" disabled selected hidden>Select Village</option>
+      <option v-for="VillageList in Village.message" :key="VillageList.id" :value="VillageList.org_id">{{ VillageList.name }}</option>
 
-</select>
+    </select>
 
-<button>Refresh</button>
-</div>
-  <div style="height: 100vh; width: 100%">
-    <l-map ref="map" v-model:zoom="zoom" :center="[-0.5350427, 34.4530968]">
+    <v-btn>Refresh</v-btn>
+  </div>
+  <div style="height:100pc; width:100%">
+    <l-map ref="map" v-model:zoom="zoom" :center="[-0.5350427	,34.4530968]">
       <l-tile-layer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         layer-type="base"
         name="OpenStreetMap"
       ></l-tile-layer>
-
-      <!-- Add markers -->
-      <l-marker v-for="(marker, index) in markers" :key="index" :lat-lng="marker.latLng">
-        <l-popup>{{ marker.description }}</l-popup>
-
-      </l-marker>
     </l-map>
   </div>
+
 </template>
