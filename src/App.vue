@@ -23,19 +23,21 @@ onMounted(() => {
         expand-on-hover
         rail
       >
-        <v-list>
+      <v-list>
           <v-list-item
-            prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-            subtitle="sandra_a88@gmailcom"
-            title="DigiMal KE"
+            prepend-avatar="https://training.digimal.uonbi.ac.ke/img/coat_of_arms.8d015f76.png"
+            subtitle="household distribution and registration"
+            title="DigiMal-KE"
+            style="font-weight: bold; color: #22c997; font-size: 24px; font-family: Inter, sans-serif;"
           ></v-list-item>
-        </v-list>
+      </v-list>
 
-        <v-divider></v-divider>
+
+        <v-divider> jjkbkj </v-divider>
 
         <v-list density="compact" nav>
           <RouterLink to="/" class="nav-link"><v-list-item prepend-icon="mdi-home" title="Home" value="home"></v-list-item></RouterLink>
-          <RouterLink to="/about" class="nav-link"><v-list-item prepend-icon="mdi-map" title="map" value="map"></v-list-item></RouterLink>
+          <RouterLink to="/map" class="nav-link"><v-list-item prepend-icon="mdi-map" title="map" value="map"></v-list-item></RouterLink>
           <v-list-item prepend-icon="mdi-car" title="Dist" value="dist"></v-list-item>
 
         </v-list>
