@@ -16,24 +16,33 @@ onMounted(() => {
 
 </script>
 <style src="@/assets/main.css" lang="css"></style>
-
 <template>
-  <header>
-    <nav class="navbar navbar-expand-lg  bag-green">
-      <div class="container">
-        <RouterLink class="navbar-brand" to="/">Table Visualization</RouterLink>
-        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <RouterLink class="nav-link" to="/about">Map</RouterLink>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <RouterView />
+  <v-card>
+    <v-layout>
+      <v-navigation-drawer
+        expand-on-hover
+        rail
+      >
+        <v-list>
+          <v-list-item
+            prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+            subtitle="sandra_a88@gmailcom"
+            title="DigiMal KE"
+          ></v-list-item>
+        </v-list>
+
+        <v-divider></v-divider>
+
+        <v-list density="compact" nav>
+          <RouterLink to="/" class="nav-link"><v-list-item prepend-icon="mdi-home" title="Home" value="home"></v-list-item></RouterLink>
+          <RouterLink to="/about" class="nav-link"><v-list-item prepend-icon="mdi-map" title="map" value="map"></v-list-item></RouterLink>
+          <v-list-item prepend-icon="mdi-car" title="Dist" value="dist"></v-list-item>
+
+        </v-list>
+      </v-navigation-drawer>
+
+      <v-main style="height: 250px"></v-main>
+    </v-layout>
+  </v-card>
+  <RouterView/>
 </template>
