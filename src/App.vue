@@ -4,14 +4,7 @@ import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 
 onMounted(() => {
-  const navbarToggle = document.querySelector('.navbar-toggler')
-  const navbarCollapse = document.querySelector('.navbar-collapse')
 
-  if (navbarToggle && navbarCollapse) {
-    navbarToggle.addEventListener('click', () => {
-      navbarCollapse.classList.toggle('show')
-    })
-  }
 })
 
 </script>
