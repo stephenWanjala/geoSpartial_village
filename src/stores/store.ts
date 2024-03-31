@@ -8,7 +8,7 @@ type CacheData = {
   pagination: Pagination;
 };
 
-const cache: Record<string, CacheData> = {};
+const CACHE_KEY_PREFIX = 'villages_cache';
 
 export const useVillagesStore = defineStore({
   id: 'villages',
@@ -19,24 +19,26 @@ export const useVillagesStore = defineStore({
     mError: ref<string | null>(null),
   }),
   actions: {
-    async fetchVillages(page: number = 1, county_id:number = 9) {
+    async fetchVillages(page: number = 1, county_id: number = 9) {
       const cacheKey = `${county_id}-${page}`;
 
       // Check if data is in cache
-      if (cache[cacheKey]) {
-        this.villages = cache[cacheKey].villages;
-        this.pagination = cache[cacheKey].pagination;
+      const cachedData = localStorage.getItem(`${CACHE_KEY_PREFIX}_${cacheKey}`);
+      if (cachedData) {
+        const { villages, pagination } = JSON.parse(cachedData) as CacheData;
+        this.villages = villages;
+        this.pagination = pagination;
         return;
       }
 
       try {
         this.loading = true;
-        const { villages, pagination } = await fetchVillagesFromViewModel(page,county_id);
+        const { villages, pagination } = await fetchVillagesFromViewModel(page, county_id);
         this.villages = villages;
         this.pagination = pagination;
 
         // Store data in cache
-        cache[cacheKey] = { villages, pagination };
+        localStorage.setItem(`${CACHE_KEY_PREFIX}_${cacheKey}`, JSON.stringify({ villages, pagination }));
       } catch (error) {
         this.mError = (error as Error).message;
       } finally {

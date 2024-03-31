@@ -43,9 +43,7 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 // Function to determine if a route is active
-const isActive = (to: string) => {
-  return route.path === to
-}
+const isActive = (path: string) => route.path === path
 </script>
 
 <style scoped>

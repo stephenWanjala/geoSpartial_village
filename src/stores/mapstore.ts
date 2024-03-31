@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { fetchCounties, fetchAdministrativeUnitsByCounty } from '@/viewmodel/MapViewmodel';
-import  type { GoogleApiResponse } from '@/types/types';
+import type { GoogleApiResponse } from '@/types/types';
 import { API_KEY } from '@/main'
 
 // Define the County interface
@@ -46,8 +46,7 @@ export const useCountyStore = defineStore({
   actions: {
     async fetchCounties() {
       try {
-        const counties = await fetchCounties(); // Call the function from the view model
-        console.log('Counties:', counties);
+        const counties = await fetchCounties();
         this.counties = counties;
       } catch (error) {
         console.error('Error fetching counties:', error);
@@ -59,7 +58,7 @@ export const useCountyStore = defineStore({
       try {
         let administrativeUnits = JSON.parse(localStorage.getItem(`adminUnits_${countyId}`) || '[]');
         if (administrativeUnits.length === 0) {
-          this.loadingCoordinates = true; // Start loading
+          this.loadingCoordinates = true;
           administrativeUnits = await fetchAdministrativeUnitsByCounty(countyId);
           for (const unit of administrativeUnits) {
             const address = `${unit.village}, ${unit.subcounty}, ${unit.county}`;
@@ -68,11 +67,11 @@ export const useCountyStore = defineStore({
             unit.longitude = coordinates.lng;
           }
           localStorage.setItem(`adminUnits_${countyId}`, JSON.stringify(administrativeUnits));
-          this.loadingCoordinates = false; // End loading
+          this.loadingCoordinates = false;
         }
         this.administrativeUnits = administrativeUnits;
       } catch (error) {
-        this.loadingCoordinates = false; // End loading in case of error
+        this.loadingCoordinates = false;
         throw error;
       }
     },
@@ -85,7 +84,6 @@ export const useCountyStore = defineStore({
         }
         const data: GoogleApiResponse = await response.json();
         const coordinates = data.results[0].geometry.location;
-        console.log('Coordinates:', coordinates);
         return coordinates;
       } catch (error) {
         console.error('Error fetching coordinates:', error);
