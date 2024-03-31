@@ -1,6 +1,7 @@
 <template>
   <v-app style="height: 500px; width: 100%">
     <v-progress-linear v-if="countyStore.loadingCoordinates" indeterminate class="bg-green"></v-progress-linear>
+    <v-alert v-else-if="countyStore.mError" type="error">{{ countyStore.mError }}</v-alert>
     <Suspense>
       <template #default>
         <l-map ref="map" :zoom="zoom" :center="center" style="height: 100%; width: 100%">

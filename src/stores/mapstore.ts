@@ -41,6 +41,7 @@ export const useCountyStore = defineStore({
     counties: [] as County[],
     administrativeUnits: [] as AdministrativeUnit[],
     loadingCoordinates: false,
+    mError: null as string | null,
   }),
   actions: {
     async fetchCounties() {
@@ -50,6 +51,7 @@ export const useCountyStore = defineStore({
         this.counties = counties;
       } catch (error) {
         console.error('Error fetching counties:', error);
+        this.mError = (error as Error).message;
         throw error;
       }
     },
@@ -78,6 +80,7 @@ export const useCountyStore = defineStore({
       try {
         const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`);
         if (!response.ok) {
+          this.mError = 'Failed to fetch coordinates';
           throw new Error('Failed to fetch coordinates');
         }
         const data: GoogleApiResponse = await response.json();
@@ -86,6 +89,7 @@ export const useCountyStore = defineStore({
         return coordinates;
       } catch (error) {
         console.error('Error fetching coordinates:', error);
+        this.mError = (error as Error).message;
         throw error;
       }
     },
