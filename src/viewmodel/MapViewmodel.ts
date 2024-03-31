@@ -43,8 +43,8 @@ export async function fetchCounties() {
       throw new Error('Failed to fetch counties');
     }
     const data = await response.json();
-    const counties: County[] = data.data;
-    return counties;
+    const counties: County[] = data.message;
+    return counties.slice(1);
   } catch (error) {
     console.error('Error fetching counties:', error);
     throw error;

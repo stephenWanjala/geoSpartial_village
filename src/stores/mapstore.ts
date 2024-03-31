@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { fetchAdministrativeUnitsByCounty, fetchCounties } from '@/viewmodel/MapViewmodel'
 import type { GoogleApiResponse } from '@/types/types'
 import { API_KEY } from '@/main'
+import { ref } from 'vue'
 
 // Define the County interface
 interface County {
@@ -38,10 +39,10 @@ interface AdministrativeUnit {
 export const useCountyStore = defineStore({
   id: 'county',
   state: () => ({
-    counties: [] as County[],
-    administrativeUnits: [] as AdministrativeUnit[],
-    loadingCoordinates: false,
-    mError: null as string | null,
+    counties: ref<County[]|null>([]),
+    administrativeUnits:ref<AdministrativeUnit[]|null>([]),
+    loadingCoordinates: ref(false),
+    mError: ref<string|null>(null),
   }),
   actions: {
     async fetchCounties() {
