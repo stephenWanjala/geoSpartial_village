@@ -52,7 +52,7 @@ onMounted(async () => {
         </l-map>
       </template>
       <template #fallback>
-        <div>Loading...</div>
+        <v-progress-circular indeterminate color="primary"></v-progress-circular>
       </template>
     </Suspense>
   </v-app>
