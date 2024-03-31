@@ -1,14 +1,3 @@
-<script lang="ts" setup>
-
-import { onMounted } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
-
-onMounted(() => {
-
-})
-
-</script>
-<style lang="css" src="@/assets/main.css"></style>
 <template>
   <v-card>
     <v-layout>
@@ -25,29 +14,47 @@ onMounted(() => {
           ></v-list-item>
         </v-list>
 
-
         <v-divider></v-divider>
 
         <v-list density="compact" nav>
           <RouterLink class="nav-link" to="/">
-            <v-list-item prepend-icon="mdi-home" title="Home" value="home"></v-list-item>
+            <v-list-item :class="{ 'active-link': isActive('/') }" prepend-icon="mdi-home" title="Home" value="home"></v-list-item>
           </RouterLink>
           <RouterLink class="nav-link" to="/map">
-            <v-list-item prepend-icon="mdi-map" title="map" value="map"></v-list-item>
+            <v-list-item :class="{ 'active-link': isActive('/map') }" prepend-icon="mdi-map" title="map" value="map"></v-list-item>
           </RouterLink>
-
         </v-list>
       </v-navigation-drawer>
 
       <v-main>
         <v-app-bar app color="#20c997" elevation="0">
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
           <v-toolbar-title> DigiMal-KE</v-toolbar-title>
         </v-app-bar>
 
         <RouterView />
-
       </v-main>
     </v-layout>
   </v-card>
 </template>
+
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+// Function to determine if a route is active
+const isActive = (to: string) => {
+  return route.path === to
+}
+</script>
+
+<style scoped>
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.active-link {
+  color: #22c997;
+}
+</style>
