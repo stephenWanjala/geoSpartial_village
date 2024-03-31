@@ -40,11 +40,15 @@ const search = async () => {
 
 const searchQuery_selected = ref('')
 
-const search_selected = async () => {
+const search_selected = async (countyName) => {
   try {
+    if(countyName == "jkG3zaihdSs"){
+      countyName = "Nairobi"
+    }
+    searchQuery_selected.value = countyName  // Update the searchQuery_selected value with the selected county name
     const response = await axios.get('https://nominatim.openstreetmap.org/search', {
       params: {
-        q: searchQuery_selected.value,
+        q: countyName, // Use the selected county name as the query
         format: 'json',
         limit: 1
       }
@@ -55,12 +59,39 @@ const search_selected = async () => {
       zoom.value = 15 // Adjust the zoom level as needed
     } else {
       // Handle case when no results are found
-      console.log('No results found')
+      console.log('No results found on search_selected')
+      console.log(countyName)
     }
   } catch (error) {
     console.error('Error searching:', error)
   }
-} 
+}
+
+const fetchCountyNameById = async (countyId) => {
+  
+  try {
+    const token = await fetchToken();
+    const response = await axios.get(`https://training.digimal.uonbi.ac.ke/api/get_org_unit_with_children?parent_id=HfVjCurKxh2`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    const counties = response.data.message;
+
+    const matchingCounty = counties.find(county => county.org_id === countyId);
+    if (matchingCounty) {
+      return search_selected(matchingCounty.name);
+    } else {
+      console.log('County not found');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching county name:', error);
+    return null;
+  }
+};
+
 
 onMounted(async () => {
   await fetchAdministrativeUnitsByCounty(35) // replace 9 with the actual county id
@@ -133,10 +164,11 @@ function refreshPage() {
 <template>
 
 <div class="select-container">
-    <select id="county" name="county" :value="selectedCounty" @input="selectedCounty = $event.target.value" >
-      <option value="" disabled hidden>Select County</option>
-      <option v-for="countList in county" :key="countList.id" :value="countList.org_id" @click="searchQuery_selected">{{ countList.name }}</option>
-    </select>
+  <select id="county" name="county" v-model="selectedCounty" @change="fetchCountyNameById(selectedCounty)">
+  <option value="" disabled hidden>Select County</option>
+  <option v-for="countList in county" :key="countList.id" :value="countList.org_id">{{ countList.name }}</option>
+</select>
+
 
     <select id="sub-county"  name="sub-county" :value="selectedSubCounty" @input="selectedSubCounty = $event.target.value" >
       <option value="" disabled selected hidden>Select Subcounty</option>
