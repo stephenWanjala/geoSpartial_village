@@ -5,7 +5,7 @@ import { ref, onMounted } from 'vue'
 import { useCountyStore } from '@/stores/mapstore'
 
 const zoom = ref(10)
-const center = ref([-0.5350427, 34.4530968])
+const center = ref([-0.5350427, 34.4530968] as [number, number])
 const countyStore = useCountyStore()
 
 onMounted(async () => {
