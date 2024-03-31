@@ -17,6 +17,7 @@
         <v-divider></v-divider>
 
         <v-list density="compact" nav>
+
           <RouterLink class="nav-link" to="/">
             <v-list-item :class="{ 'active-link': isActive('/') }" prepend-icon="mdi-home" title="Home" value="home"></v-list-item>
           </RouterLink>

@@ -39,4 +39,30 @@
     color: #999; /* Change the color as per your design */
   }
   
+  .active-link {
+    color: #000000; /* Change to the desired darker color */
+  }
+
+
+  .search_bar {
+    background-color: #fff; /* White background */
+    width: 250px; /* Increase width */
+    padding: 10px; /* Add padding for better appearance */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    position: absolute; 
+    top: 20px; 
+    right: 
+    20px; 
+    z-index: 1;
+  }
+  
+  .search_bar input {
+    font-size: 16px; /* Adjust font size */
+  }
+  
+  .search_bar button {
+    margin-left: 10px; /* Add space between input and button */
+  }
   
