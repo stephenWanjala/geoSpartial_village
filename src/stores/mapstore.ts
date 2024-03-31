@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia';
-import { fetchCounties, fetchAdministrativeUnitsByCounty } from '@/viewmodel/MapViewmodel';
-import type { GoogleApiResponse } from '@/types/types';
+import { defineStore } from 'pinia'
+import { fetchAdministrativeUnitsByCounty, fetchCounties } from '@/viewmodel/MapViewmodel'
+import type { GoogleApiResponse } from '@/types/types'
 import { API_KEY } from '@/main'
 
 // Define the County interface
@@ -83,8 +83,7 @@ export const useCountyStore = defineStore({
           throw new Error('Failed to fetch coordinates');
         }
         const data: GoogleApiResponse = await response.json();
-        const coordinates = data.results[0].geometry.location;
-        return coordinates;
+        return data.results[0].geometry.location;
       } catch (error) {
         console.error('Error fetching coordinates:', error);
         this.mError = (error as Error).message;
