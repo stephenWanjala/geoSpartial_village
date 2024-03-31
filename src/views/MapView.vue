@@ -16,17 +16,11 @@ const center = ref([-0.5350427, 34.4530968] as [number, number])
 
 const searchQuery = ref('')
 
-const search = async (searchParam:string|null) => {
-  let searcher = ref<string>('')
-  if(searchParam){
-    searcher.value=searchParam
-  } else{
-    searcher.value =searchQuery.value
-  }
+const search = async () => {
   try {
     const response = await axios.get('https://nominatim.openstreetmap.org/search', {
       params: {
-        q: searcher.value,
+        q: searchQuery.value,
         format: 'json',
         limit: 1
       }
@@ -44,6 +38,29 @@ const search = async (searchParam:string|null) => {
   }
 } 
 
+const searchQuery_selected = ref('')
+
+const search_selected = async () => {
+  try {
+    const response = await axios.get('https://nominatim.openstreetmap.org/search', {
+      params: {
+        q: searchQuery_selected.value,
+        format: 'json',
+        limit: 1
+      }
+    })
+    if (response.data.length > 0) {
+      const result = response.data[0]
+      center.value = [parseFloat(result.lat), parseFloat(result.lon)]
+      zoom.value = 15 // Adjust the zoom level as needed
+    } else {
+      // Handle case when no results are found
+      console.log('No results found')
+    }
+  } catch (error) {
+    console.error('Error searching:', error)
+  }
+} 
 
 onMounted(async () => {
   await fetchAdministrativeUnitsByCounty(35) // replace 9 with the actual county id
@@ -116,9 +133,9 @@ function refreshPage() {
 <template>
 
 <div class="select-container">
-    <select id="county" name="county" :value="selectedCounty" @input="selectedCounty = $event.target.value" @change=search(selectedCounty)>
+    <select id="county" name="county" :value="selectedCounty" @input="selectedCounty = $event.target.value" >
       <option value="" disabled hidden>Select County</option>
-      <option v-for="countList in county" :key="countList.id" :value="countList.org_id">{{ countList.name }}</option>
+      <option v-for="countList in county" :key="countList.id" :value="countList.org_id" @click="searchQuery_selected">{{ countList.name }}</option>
     </select>
 
     <select id="sub-county"  name="sub-county" :value="selectedSubCounty" @input="selectedSubCounty = $event.target.value" >
