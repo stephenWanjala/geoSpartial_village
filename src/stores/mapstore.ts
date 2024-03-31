@@ -46,8 +46,7 @@ export const useCountyStore = defineStore({
   actions: {
     async fetchCounties() {
       try {
-        const counties = await fetchCounties();
-        this.counties = counties;
+        this.counties = await fetchCounties();
       } catch (error) {
         console.error('Error fetching counties:', error);
         this.mError = (error as Error).message;

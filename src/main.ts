@@ -16,7 +16,7 @@ import { mdi } from 'vuetify/iconsets/mdi'
 
 
 export const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY
-export const BEARER_TOKEN = import.meta.env.VITE_BEARER_TOKEN
+
 
 const vuetify = createVuetify({
   components,

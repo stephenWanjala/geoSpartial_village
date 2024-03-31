@@ -1,5 +1,5 @@
 // Define the County interface
-import { BEARER_TOKEN } from '@/main'
+import { fetchToken } from '@/viewmodel/Api'
 
 interface County {
   id: number;
@@ -33,9 +33,10 @@ interface AdministrativeUnit {
 // Fetch function to retrieve counties
 export async function fetchCounties() {
   try {
+    const token = await fetchToken();
     const response = await fetch('https://training.digimal.uonbi.ac.ke/api/get_org_unit_with_children?parent_id=HfVjCurKxh2', {
       headers: {
-        Authorization: `Bearer ${BEARER_TOKEN}`
+        Authorization: `Bearer ${token}`
       }
     });
     if (!response.ok) {
@@ -53,9 +54,10 @@ export async function fetchCounties() {
 // Fetch function to retrieve administrative units by county
 export async function fetchAdministrativeUnitsByCounty(countyId: number) {
   try {
+    const token = await fetchToken();
     const response = await fetch(`https://training.digimal.uonbi.ac.ke/api/administrative_unit?county_id=${countyId}`, {
       headers: {
-        Authorization: `Bearer ${BEARER_TOKEN}`
+        Authorization: `Bearer ${token}`
       }
     });
     if (!response.ok) {
