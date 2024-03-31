@@ -29,7 +29,7 @@ onMounted(() => {
         <v-divider></v-divider>
 
         <v-list density="compact" nav>
-          <RouterLink class="nav-link" to="/">
+          <RouterLink class="nav-link" to="/" exact active-class="active-link">
             <v-list-item prepend-icon="mdi-home" title="Home" value="home"></v-list-item>
           </RouterLink>
           <RouterLink class="nav-link" to="/map">

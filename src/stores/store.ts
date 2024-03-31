@@ -19,7 +19,7 @@ export const useVillagesStore = defineStore({
     mError: ref<string | null>(null),
   }),
   actions: {
-    async fetchVillages(page: number = 1, county_id:number = 9) {
+    async fetchVillages(page: number = 1, county_id:number = 17) {
       const cacheKey = `${county_id}-${page}`;
 
       // Check if data is in cache
