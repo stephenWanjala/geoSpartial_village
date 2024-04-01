@@ -105,9 +105,4 @@ const exportToJson = () => {
   </div>
 </template>
 
-<style scoped>
-.select {
-  width: 200px;
-  margin: 20px auto;
-}
-</style>
+
