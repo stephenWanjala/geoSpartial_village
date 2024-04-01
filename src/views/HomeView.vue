@@ -60,12 +60,13 @@ const prevPage = () => {
 }
 
 const exportToJson = () => {
+  const selectedCountyName = counties.value.find(county => county.id === selectedCounty.value)?.name || 'data'
   const dataToExport = JSON.stringify(villages.value, null, 2)
   const blob = new Blob([dataToExport], { type: 'application/json' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = 'data.json'
+  a.download = `${selectedCountyName}.json`
   document.body.appendChild(a)
   a.click()
   window.URL.revokeObjectURL(url)
