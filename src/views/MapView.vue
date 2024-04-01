@@ -35,7 +35,7 @@ const search = async () => {
 };
 
 onMounted(async () => {
-  await countyStore.fetchAdministrativeUnitsByCounty(35) // replace 9 with the actual county id
+  await countyStore.fetchAdministrativeUnitsByCounty(9) // replace 9 with the actual county id
 })
 </script>
 

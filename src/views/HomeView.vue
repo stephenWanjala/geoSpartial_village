@@ -82,7 +82,7 @@ const exportToJson = () => {
           </select>
         </v-col>
         <v-col cols="12" md="6">
-          <v-btn @click="exportToJson" v-if="!loading" class="btn btn-primary mt-2">Export to JSON</v-btn>
+          <v-btn @click="exportToJson" v-if="!loading && villages.length > 0" class="btn btn-primary mt-2">Export to JSON</v-btn>
         </v-col>
       </v-row>
     </div>
