@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import 'leaflet/dist/leaflet.css'
 import { LMap, LMarker, LPopup, LTileLayer } from '@vue-leaflet/vue-leaflet'
-import { onBeforeMount, onBeforeUnmount, onMounted, ref , watch} from 'vue'
+import { onMounted, ref , watch} from 'vue'
 import { useCountyStore } from '@/stores/mapstore'
 const {
   counties, fetchAdministrativeUnitsByCounty, fetchCounties, mError, loadingCoordinates, administrativeUnits
