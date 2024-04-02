@@ -248,6 +248,15 @@ function refreshPage() {
           </l-marker>
         </l-map>
 
+        <v-card class="bottom-left-card">
+      <v-card-text>
+        <v-card-title>Coordinates</v-card-title>
+        <!-- Your data goes here -->
+        <div><strong>latitude : </strong>lat-data</div>
+        <div><strong>longitude : </strong> lat-Value</div>
+      </v-card-text>
+    </v-card>
+
         <!-- Floating search box -->
         <div class="search_bar">
           <v-text-field v-model="searchQuery" placeholder="Search..." outlined></v-text-field>
