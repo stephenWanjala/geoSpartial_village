@@ -1,6 +1,5 @@
 <template>
-  <v-card>
-    <v-layout>
+    <v-layout class="rounded rounded-md">
       <v-navigation-drawer
         expand-on-hover
         rail
@@ -26,16 +25,15 @@
           </RouterLink>
         </v-list>
       </v-navigation-drawer>
-
+      <v-app-bar app color="#20c997" elevation="0">
+        <v-toolbar-title> DigiMal-KE</v-toolbar-title>
+      </v-app-bar>
       <v-main>
-        <v-app-bar app color="#20c997" elevation="0">
-          <v-toolbar-title> DigiMal-KE</v-toolbar-title>
-        </v-app-bar>
 
         <RouterView />
       </v-main>
     </v-layout>
-  </v-card>
+
 </template>
 
 <script setup lang="ts">

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useVillagesStore } from '@/stores/store'
 import { onMounted, ref, watch } from 'vue'
-import type { Village, County } from '@/types/types'
+import type { County, Village } from '@/types/types'
 
 const villagesStore = useVillagesStore()
 const villages = ref<Village[]>([])
@@ -11,6 +11,7 @@ const currentPage = ref<number>(1)
 const counties = ref<County[]>([])
 const SELECTED_COUNTY_KEY = 'selected_county'
 const selectedCounty = ref<number>(parseInt(localStorage.getItem(SELECTED_COUNTY_KEY) || '9'))
+const searchQuery = ref('')
 
 const handleError = (error: Error) => {
   console.error(error)
@@ -74,35 +75,61 @@ const exportToJson = () => {
 </script>
 
 <template>
-  <div class="container">
-    <div class="text-center mt-3 align-content-center">
-      <v-row>
-        <v-col cols="12" md="6">
-          <select class="form-select" v-model="selectedCounty">
-            <option v-for="county in counties" :value="county.id" :key="county.id">{{ county.name }}</option>
-          </select>
+  <v-container class="text-center mt-3 align-content-center container-fluid">
+    <v-row class="text-center d-flex justify-content-between">
+      <v-col cols="6" md="3">
+        <select class="form-select" v-model="selectedCounty">
+          <option v-for="county in counties" :value="county.id" :key="county.id">{{ county.name }}</option>
+        </select>
+      </v-col>
+      <v-col cols="6" md="3">
+        <v-btn @click="exportToJson" v-if="!loading && villages.length > 0" class="btn btn-primary">Export to
+          JSON
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-card>
+    <v-progress-linear v-if="loading" indeterminate class="bg-green"></v-progress-linear>
+    <v-alert v-else-if="mError" type="error">{{ mError }}</v-alert>
+    <v-data-table :items="villages"
+                  :loading="loading"
+                  item-key="id"
+                  :search="searchQuery"
+                  auto-width>
+      <template v-slot:top>
+        <v-col class="mx-auto" md="6" sm="10">
+        <v-text-field
+          v-model="searchQuery"
+          label="Search Villages"
+          variant="solo-filled"
+          hide-details
+          prepend-inner-icon="mdi-magnify"
+          single-line
+          style="align-content: center;"
+        ></v-text-field>
         </v-col>
-        <v-col cols="12" md="6">
-          <v-btn @click="exportToJson" v-if="!loading && villages.length > 0" class="btn btn-primary mt-2">Export to JSON</v-btn>
-        </v-col>
-      </v-row>
-    </div>
-    <div>
-      <v-progress-linear v-if="loading" indeterminate class="bg-green"></v-progress-linear>
-      <v-alert v-else-if="mError" type="error">{{ mError }}</v-alert>
-      <v-data-table :items="villages" :loading="loading" item-key="id" auto-width>
-        <template v-slot:items="props">
-          <td>{{ props.item.org_id }}</td>
-          <td>{{ props.item.name }}</td>
-        </template>
-      </v-data-table>
-      <v-row class="d-flex justify-center">
-        <v-btn @click="prevPage" :disabled="currentPage === 1">Previous</v-btn>
-        <span>Page {{ currentPage }} of {{ villagesStore.pagination.total_pages }}</span>
-        <v-btn @click="nextPage" :disabled="currentPage === villagesStore.pagination.total_pages">Next</v-btn>
-      </v-row>
-    </div>
-  </div>
+      </template>
+
+      <template v-slot:bottom>
+        <div class="text-center pt-2">
+          <v-pagination
+            v-model="currentPage"
+            :length="villagesStore.pagination.total_pages "
+            @input="changePage"
+
+          ></v-pagination>
+        </div>
+      </template>
+
+    </v-data-table>
+          <v-row class="d-flex justify-center">
+            <v-btn @click="prevPage" :disabled="currentPage === 1">Previous</v-btn>
+            <span>Page {{ currentPage }} of {{ villagesStore.pagination.total_pages }}</span>
+            <v-btn @click="nextPage" :disabled="currentPage === villagesStore.pagination.total_pages">Next</v-btn>
+          </v-row>
+  </v-card>
+
 </template>
 
 
