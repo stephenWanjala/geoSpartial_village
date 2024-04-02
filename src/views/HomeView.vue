@@ -111,16 +111,6 @@ const exportToJson = () => {
         </v-col>
       </template>
 
-      <template v-slot:bottom>
-        <div class="text-center pt-2">
-          <v-pagination
-            v-model="currentPage"
-            :length="villagesStore.pagination.total_pages "
-            @input="changePage"
-
-          ></v-pagination>
-        </div>
-      </template>
 
     </v-data-table>
           <v-row class="d-flex justify-center">
