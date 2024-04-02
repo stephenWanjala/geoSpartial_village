@@ -67,6 +67,7 @@ const search_selected = async (countyName) => {
     console.error('Error searching:', error)
   }
 }
+
 let parent_org_id = null;
 const fetchCountyNameById = async (countyId, isFirstSelection = false) => {
   try {
@@ -84,7 +85,7 @@ const fetchCountyNameById = async (countyId, isFirstSelection = false) => {
         Authorization: `Bearer ${token}` 
       }
     });
-    const counties = response.data.message; // counties in HfVjCurKxh2<kenya>
+    const counties = response.data.message;
 
     if (countyId) {
       parent_org_id = countyId;
@@ -179,7 +180,7 @@ function refreshPage() {
 <div class="select-container">
   <select id="county" name="county" :value="selectedCounty" @input="selectedCounty = $event.target.value" @change="fetchCountyNameById(selectedCounty, true)">
   <option value="" disabled hidden> Select County </option>
-  <option v-for="countList in county" :key="countList.id" :value="countList.org_id">{{ countList.name }}</option>
+  <option v-for="countList in county.slice(1)" :key="countList.id" :value="countList.org_id">{{ countList.name }}</option>
 </select>
 
 
@@ -252,8 +253,8 @@ function refreshPage() {
       <v-card-text>
         <v-card-title>Coordinates</v-card-title>
         <!-- Your data goes here -->
-        <div><strong>latitude : </strong>lat-data</div>
-        <div><strong>longitude : </strong> lat-Value</div>
+        <div><strong>Latitude : </strong>lat-data</div>
+        <div><strong>Longitude : </strong> lat-Value</div>
       </v-card-text>
     </v-card>
 
