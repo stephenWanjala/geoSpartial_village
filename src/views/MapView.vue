@@ -184,27 +184,27 @@ function refreshPage() {
 </select>
 
 
-    <select id="sub-county"  name="sub-county" :value="selectedSubCounty" @input="selectedSubCounty = $event.target.value" @change="fetchCountyNameById(selectedSubCounty)">
+    <select id="sub-county"  name="sub-county" :value="selectedSubCounty" @input="selectedSubCounty = $event.target.value" @change="fetchCountyNameById(selectedSubCounty)" v-if="sub_county.length > 0">
       <option value="" disabled selected hidden> Select Subcounty </option>
       <option v-for="sub_countyList in sub_county" :key="sub_countyList.id" :value="sub_countyList.org_id">{{ sub_countyList.name }}</option>
     </select>
 
-    <select id="selection" name="location" :value="selectedWard" @input="selectedWard = $event.target.value" @change="fetchCountyNameById(selectedWard)">
+    <select id="selection" name="location" :value="selectedWard" @input="selectedWard = $event.target.value" @change="fetchCountyNameById(selectedWard)" v-if="ward.length > 0">
       <option value="" disabled selected hidden>Select ward</option>
       <option v-for="ward_list in ward" :key="ward_list.id" :value="ward_list.org_id">{{ ward_list.name }}</option>
     </select>
 
-    <select id="Sublocation" name="Sublocation" :value="selectedlocation" @input="selectedlocation = $event.target.value" @change="fetchCountyNameById(selectedlocation)">
+    <select id="Sublocation" name="Sublocation" :value="selectedlocation" @input="selectedlocation = $event.target.value" @change="fetchCountyNameById(selectedlocation)" v-if="location.length > 0">
       <option value="" disabled selected hidden>Select Location</option>
       <option v-for="locationList in location" :key="locationList.id" :value="locationList.org_id">{{ locationList.name }}</option>
     </select>
 
-    <select id="village" name="village" :value="selectedSublocation" @input="selectedSublocation = $event.target.value" @change="fetchCountyNameById(selectedSublocation)">
+    <select id="village" name="village" :value="selectedSublocation" @input="selectedSublocation = $event.target.value" @change="fetchCountyNameById(selectedSublocation)" v-if="Sublocation.length > 0">
       <option value="" disabled selected hidden>Select Sublocation</option>
       <option v-for="SublocationList in Sublocation" :key="SublocationList.id" :value="SublocationList.org_id">{{ SublocationList.name }}</option>
     </select>
 
-    <select id="village" name="village" :value="selectedVillage" @input="selectedVillage = $event.target.value" @change="fetchCountyNameById(selectedVillage)">
+    <select id="village" name="village" :value="selectedVillage" @input="selectedVillage = $event.target.value" @change="fetchCountyNameById(selectedVillage)" v-if="Village.length > 0">
       <option value="" disabled selected hidden>Select Village</option>
       <option v-for="VillageList in Village" :key="VillageList.id" :value="VillageList.org_id">{{ VillageList.name }}</option>
     </select>
