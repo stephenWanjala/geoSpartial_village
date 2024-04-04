@@ -253,6 +253,7 @@ function refreshPage() {
       <v-card-text>
         <v-card-title>Coordinates</v-card-title>
         <!-- Your data goes here -->
+        <div><strong>Village Name : </strong>lat-data</div>
         <div><strong>Latitude : </strong>lat-data</div>
         <div><strong>Longitude : </strong> lat-Value</div>
       </v-card-text>
@@ -261,8 +262,10 @@ function refreshPage() {
 
         <!-- Floating search box -->
         <div class="search_bar">
+          <form @submit.prevent="search">
             <v-text-field v-model="searchQuery" placeholder="Search..." outlined></v-text-field>
-            <v-btn @click="search" text>Search</v-btn>
+            <v-btn type="submit" text>Search</v-btn>
+          </form>
         </div>
       </div>
       <template #fallback>
