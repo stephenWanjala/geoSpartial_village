@@ -17,6 +17,9 @@ const center = ref([-0.5350427, 34.4530968] as [number, number])
 
 const searchQuery = ref('');
 
+const searchResults = ref([]); // Add this line to store the search results
+const selectedResult = ref(null);
+
 const search = async () => {
   try {
     const response = await axios.get('https://nominatim.openstreetmap.org/search', {
@@ -27,17 +30,19 @@ const search = async () => {
       },
     });
     if (response.data.length > 0) {
-      console.log(response.data);
-      const result = response.data[0];
-      center.value = [parseFloat(result.lat), parseFloat(result.lon)];
-      zoom.value = 15 ; // Adjust the zoom level as needed
+      searchResults.value = response.data; // Update the search results
     } else {
-      // Handle case when no results are found
       console.log('No results found');
     }
   } catch (error) {
     console.error('Error searching:', error);
   }
+};
+
+const selectResult = (result) => { // Add this function to handle result selection
+  center.value = [parseFloat(result.lat), parseFloat(result.lon)];
+  zoom.value = 15;
+  selectedResult.value = result; // Update the selected result
 };
 
 const searchQuery_selected = ref('')
@@ -249,20 +254,26 @@ function refreshPage() {
           </l-marker>
         </l-map>
 
-    <v-card class="bottom-left-card">
-      <v-card-text>
-        <v-card-title>Coordinates</v-card-title>
-        <!-- Your data goes here -->
-        <div><strong>Latitude : </strong>lat-data</div>
-        <div><strong>Longitude : </strong> lat-Value</div>
-      </v-card-text>
-    </v-card>
+        <v-card class="bottom-left-card">
+          <v-card-text v-if="selectedResult !=null">
+            <v-card-title>Coordinates</v-card-title>
+            <!-- Your data goes here -->
+            <div><strong>Village Name : </strong>{{ selectedResult.display_name}}</div>
+            <div><strong>Latitude : </strong>{{ selectedResult.lat }}</div>
+            <div><strong>Longitude : </strong>{{ selectedResult.lon }}</div>
+          </v-card-text>
+        </v-card>
 
 
         <!-- Floating search box -->
         <div class="search_bar">
+          <form @submit.prevent="search">
             <v-text-field v-model="searchQuery" placeholder="Search..." outlined></v-text-field>
-            <v-btn @click="search" text>Search</v-btn>
+            <v-btn type="submit" text>Search</v-btn>
+          </form>
+          <div v-for="result in searchResults" :key="result.id">
+            <v-card-item @click="selectResult(result)">{{ result.display_name }}</v-card-item>
+          </div>
         </div>
       </div>
       <template #fallback>
