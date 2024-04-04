@@ -133,7 +133,7 @@ const selectedSublocation = ref(null); // Initialize selectedCounty as null
 const selectedVillage = ref(null); // Initialize selectedVillage as null
 
 onMounted(async () => {
-  await countyStore.fetchAdministrativeUnitsByCounty(17) // replace 9 with the actual county id
+  await countyStore.fetchAdministrativeUnitsByCounty(9) // replace 9 with the actual county id
 })
 
 const fetchData = async (parentId) => {
