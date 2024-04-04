@@ -21,7 +21,7 @@
             <v-list-item :class="{ 'active-link': isActive('/') }" prepend-icon="mdi-home" title="Home" value="home"></v-list-item>
           </RouterLink>
           <RouterLink class="nav-link" to="/map">
-            <v-list-item :class="{ 'active-link': isActive('/map') }" prepend-icon="mdi-map" title="map" value="Map"></v-list-item>
+            <v-list-item :class="{ 'active-link': isActive('/map') }" prepend-icon="mdi-map-marker" title="map" value="Map"></v-list-item>
           </RouterLink>
         </v-list>
       </v-navigation-drawer>
