@@ -255,12 +255,12 @@ function refreshPage() {
         </l-map>
 
         <v-card class="bottom-left-card">
-          <v-card-text v-if="selectedResult">
+          <v-card-text v-if="selectedResult !=null">
             <v-card-title>Coordinates</v-card-title>
             <!-- Your data goes here -->
-            <div><strong>Village Name : </strong>{{ selectedResult.value.display_name }}</div>
-            <div><strong>Latitude : </strong>{{ selectedResult.value.lat }}</div>
-            <div><strong>Longitude : </strong>{{ selectedResult.value.lon }}</div>
+            <div><strong>Village Name : </strong>{{ selectedResult.display_name}}</div>
+            <div><strong>Latitude : </strong>{{ selectedResult.lat }}</div>
+            <div><strong>Longitude : </strong>{{ selectedResult.lon }}</div>
           </v-card-text>
         </v-card>
 
