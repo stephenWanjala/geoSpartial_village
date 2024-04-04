@@ -272,9 +272,6 @@ function refreshPage() {
             <v-btn type="submit" text>Search</v-btn>
           </form>
           <div v-for="result in searchResults" :key="result.id">
-            {{console.log(result.name)}}
-            {{console.log(result.lat)}}
-            {{console.log(result.lon)}}
             <v-card-item @click="selectResult(result)">{{ result.display_name }}</v-card-item>
           </div>
         </div>
